@@ -14,6 +14,25 @@
   <link href="css/print.min.css" rel="stylesheet" media="print">
   <script async src="http://www.google-analytics.com/analytics.js"></script>
   <script async src="js/combined.min.js"></script>
+  <style>
+    header,
+    footer,
+    .container {
+      max-width: 45em;
+      margin: 0 auto;
+    }
+    header img {
+      float: left;
+    }
+    header p {
+      font-size: 1.5em;
+      font-weight: bold;
+      padding-left: 4em;
+    }
+    .content li {
+      list-style-type: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -64,7 +83,8 @@
       <p>&copy; Web Performance 2014 <span id="crp-stats"></span>
       </p>
     </footer>
-    <script>
+  </div>
+  <script>
       var cb = function() {
         var l = document.createElement('link'); l.rel = 'stylesheet';
         l.href = 'css/style.min.css';
@@ -74,7 +94,7 @@
           webkitRequestAnimationFrame || msRequestAnimationFrame;
       if (raf) raf(cb);
       else window.addEventListener('load', cb);
-    </script>
+  </script>
 </body>
 
 </html>

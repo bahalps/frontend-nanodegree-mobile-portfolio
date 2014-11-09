@@ -35,12 +35,6 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            css: {
-                src: [
-          'css/*'
-        ],
-                dest: 'css/combined.css'
-            },
             js: {
                 src: [
           'js/*'
@@ -84,5 +78,5 @@ module.exports = function (grunt) {
     });
 
     // Register default tasks
-    grunt.registerTask('default', ['concat:css', 'concat:js', 'uglify:js', 'psi-ngrok']);
+    grunt.registerTask('default', ['concat:js', 'uglify:js', 'cssmin', 'psi-ngrok']);
 }

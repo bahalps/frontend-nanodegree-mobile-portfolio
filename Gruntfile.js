@@ -35,32 +35,58 @@ module.exports = function (grunt) {
             }
         },
         concat: {
+            css: {
+                src: [
+                    'views/css/*'
+                ],
+                dest: 'views/build/combined.css'
+            },
             js: {
                 src: [
           'js/*'
         ],
-                dest: 'js/combined.js'
+                dest: 'build/combined.js'
             }
         },
         cssmin: {
             css: {
                 files: {
-                    'css/style.min.css': ['css/style.css'],
-                    'css/print.min.css': ['css/print.css']
+                    'build/style.min.css': ['css/style.css'],
+                    'build/print.min.css': ['css/print.css'],
+                    'views/build/combined.min.css': ['views/build/combined.css']
                 }
             }
         },
         uglify: {
             js: {
                 files: {
-                    'js/combined.min.js': ['js/combined.js']
+                    'build/combined.min.js': ['js/combined.js'],
+                    'views/build/main.min.js': ['views/js/main.js']
                 }
+            }
+        },
+        imagemin: {
+            dynamic: {
+                files: [{
+                    expand: true,
+                    cwd: 'images/',
+                    src: ['**/*.{png,jpg,gif}'],
+                    dest: 'build/'
+                },
+                    {
+                        expand: true,
+                        cwd: 'views/images/',
+                        src: ['**/*.{png,jpg,gif}'],
+                        dest: 'views/build/'
+                }]
             }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-newer');
     // Register customer task for ngrok
     grunt.registerTask('psi-ngrok', 'Run pagespeed with ngrok', function () {
         var done = this.async();
@@ -78,5 +104,5 @@ module.exports = function (grunt) {
     });
 
     // Register default tasks
-    grunt.registerTask('default', ['concat:js', 'uglify:js', 'cssmin', 'psi-ngrok']);
+    grunt.registerTask('default', ['newer:concat', 'newer:uglify:js', 'newer:cssmin', 'newer:imagemin', 'psi-ngrok']);
 }

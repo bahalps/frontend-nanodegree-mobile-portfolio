@@ -10,9 +10,9 @@
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
     <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
 
-    <link href="css/print.min.css" rel="stylesheet" media="print">
+    <link href="build/print.min.css" rel="stylesheet" media="print">
     <script src="http://www.google-analytics.com/analytics.js" async></script>
-    <script async src="js/combined.min.js"></script>
+    <script async src="build/combined.min.js"></script>
     <style>
       header,
       footer,
@@ -31,12 +31,16 @@
       .content li {
         list-style-type: none;
       }
+      img {
+        border: 0;
+        max-width: 100%;
+      }
     </style>
   </head>
 
   <body>
     <header>
-      <a href="/"><img src="img/profilepic.jpg"></a>
+      <a href="/"><img src="build/profilepic.jpg"></a>
       <p>Cameron Pittman<br><span>Course Developer</span></p>
     </header>
 
@@ -47,7 +51,7 @@
 
       <div class="content">
 
-        <img class="img-responsive" src="img/2048.png">
+        <img class="img-responsive" src="build/2048.png">
 
         <p>Bacon ipsum dolor sit amet et pork belly porchetta excepteur dolor, laborum laboris magna labore dolore in fugiat beef ribs. Fugiat leberkas nulla do kevin dolore. Flank hamburger dolor swine prosciutto sirloin pig jerky sunt consequat pariatur. Mollit meatloaf nostrud laboris shoulder excepteur velit officia meatball nisi turkey. Nulla jowl spare ribs, et drumstick magna frankfurter.</p>
 
@@ -61,7 +65,7 @@
       <script>
         var cb = function() {
           var l = document.createElement('link'); l.rel = 'stylesheet';
-          l.href = 'css/style.min.css';
+          l.href = 'build/style.min.css';
           var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
         };
         var raf = requestAnimationFrame || mozRequestAnimationFrame ||

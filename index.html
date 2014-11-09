@@ -11,9 +11,9 @@
   <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
   <!--<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">-->
 
-  <link href="css/print.min.css" rel="stylesheet" media="print">
+  <link href="build/print.min.css" rel="stylesheet" media="print">
   <script async src="http://www.google-analytics.com/analytics.js"></script>
-  <script async src="js/combined.min.js"></script>
+  <script async src="build/combined.min.js"></script>
   <style>
     header,
     footer,
@@ -32,13 +32,17 @@
     .content li {
       list-style-type: none;
     }
+    img {
+      border: 0;
+      max-width: 100%;
+    }
   </style>
 </head>
 
 <body>
   <header>
     <a href="/">
-      <img src="img/profilepic.jpg">
+      <img src="build/profilepic.jpg">
     </a>
     <p>Cameron Pittman
       <br><span>Course Developer</span>
@@ -54,19 +58,19 @@
     <div class="content">
       <ul>
         <li>
-          <img src="img/2048-small.jpg">
+          <img src="build/2048-small.jpg">
           <a href="project-2048.html">Build Your Own 2048!</a>
           <p>I made my own version of 2048. How cool is that!?</p>
         </li>
 
         <li>
-          <img src="img/website-optimization.jpg">
+          <img src="build/website-optimization.jpg">
           <a href="project-webperf.html">Website Performance Optimization</a>
           <p>Hey... this class looks familiar.</p>
         </li>
 
         <li>
-          <img src="img/devices.jpg">
+          <img src="build/devices.jpg">
           <a href="project-mobile.html">Mobile Web Development</a>
           <p>Making mobile apps isn't so hard after all.</p>
         </li>
@@ -87,7 +91,7 @@
   <script>
       var cb = function() {
         var l = document.createElement('link'); l.rel = 'stylesheet';
-        l.href = 'css/style.min.css';
+        l.href = 'build/style.min.css';
         var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
       };
       var raf = requestAnimationFrame || mozRequestAnimationFrame ||

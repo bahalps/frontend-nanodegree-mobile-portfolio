@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content=" FILL ME IN ">
-  <meta name="author" content=" FILL ME IN ">
+  <meta name="description" content="Website Performance Optimization">
+  <meta name="author" content="Ben Halperin">
   <title>Cameron Pitman: Portfolio</title>
 
   <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
@@ -13,7 +13,6 @@
 
   <link href="build/print.min.css" rel="stylesheet" media="print">
   <script async src="http://www.google-analytics.com/analytics.js"></script>
-  <script async src="build/combined.min.js"></script>
   <style>
     header,
     footer,
@@ -71,19 +70,7 @@
       </p>
     </footer>
   </div>
-  <script>
-    var cb = function () {
-      var l = document.createElement('link');
-      l.rel = 'stylesheet';
-      l.href = 'build/style.min.css';
-      var h = document.getElementsByTagName('head')[0];
-      h.parentNode.insertBefore(l, h);
-    };
-    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-      webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) raf(cb);
-    else window.addEventListener('load', cb);
-  </script>
+  <script src="build/combined.min.js"></script>
 </body>
 
 </html>

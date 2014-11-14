@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<head>  
+
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Frame rate improvement challenge">
   <meta name="author" content="Ben Halperin">
+  <!--Inlined img-responsive class so the pizzeria image won't extend past
+  the screen on mobile devices-->
   <style>
     .img-responsive {
       display: block;
@@ -46,12 +49,13 @@
     </div>
     <div id="callToAction" class="row">
       <div class="col-md-4">
-        <img src="build/pizzeria.jpg" class="img-responsive"> <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->
+        <img src="build/pizzeria.jpg" class="img-responsive">
+        <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->
       </div>
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-12">
-            <h2>We Have Hundreds of Pizza Recipes!</h2>            
+            <h2>We Have Hundreds of Pizza Recipes!</h2> 
             <p>At Cam's Pizzeria, we know you want options. Pepperoni? Boring. Cheese? No way! Sausage? C'mon, let's get creative.</p>
 
             <p>We have every pizza ingredient imaginable in our kitchen because we know you take choice seriously. Take a look through our menu of hundreds of pizza options and we know that you'll find something you love.</p>
@@ -90,11 +94,17 @@
         <div class="row">
           <div class="col-md-6">
             <h3>Pizza Road</h3>
-            <p>1800 Pizza Road<br>San Francisco, CA<br>01010<br>555-555-5555</p>
+            <p>1800 Pizza Road
+              <br>San Francisco, CA
+              <br>01010
+              <br>555-555-5555</p>
           </div>
           <div class="col-md-6">
             <h3>Classic Pie Way</h3>
-            <p>999 Classic Pie Way<br>New York, NY<br>00100<br>555-555-5555</p>
+            <p>999 Classic Pie Way
+              <br>New York, NY
+              <br>00100
+              <br>555-555-5555</p>
           </div>
         </div>
       </div>
@@ -147,17 +157,6 @@
     </div>
     <div id="footer" class="col-md-12">Thanks for visiting! &copy; 2014 Udacity</div>
   </div>
-  <script>
-    var cb = function() {
-      var l = document.createElement('link'); l.rel = 'stylesheet';
-      l.href = 'build/combined.min.css';
-      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-    };
-    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-        webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) raf(cb);
-    else window.addEventListener('load', cb);
-  </script>
   <script type="text/javascript" src="build/combined.min.js"></script>
 </body>
 

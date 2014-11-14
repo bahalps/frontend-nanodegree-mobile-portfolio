@@ -539,21 +539,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector("#movingPizzas1").appendChild(elem);
         }
     }
-    /*
-    for (var i = 0; i < 200; i++) {
-        var topPosition = Math.floor((i / cols) * s);
-        var leftPosition = (i % cols) * s;
-        if (topPosition <= window.screen.height &&
-            leftPosition <= window.screen.width) {
-          var elem = document.createElement('img');
-          elem.className = 'mover';
-          elem.src = "build/pizza.png";
-          elem.basicLeft = (i % cols) * s;
-          elem.style.top = (Math.floor(i / cols) * s) + 'px';
-          document.querySelector("#movingPizzas1").appendChild(elem);
-        }
-    }
-    */
     items = document.querySelectorAll('.mover');
     updatePositions();
 });

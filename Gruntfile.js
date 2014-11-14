@@ -46,6 +46,12 @@ module.exports = function (grunt) {
           'js/*'
         ],
                 dest: 'build/combined.js'
+            },
+            js_views: {
+                src: [
+                    'views/js/*'
+                ],
+                dest: 'views/build/combined.js'
             }
         },
         cssmin: {
@@ -60,8 +66,8 @@ module.exports = function (grunt) {
         uglify: {
             js: {
                 files: {
-                    'build/combined.min.js': ['js/combined.js'],
-                    'views/build/main.min.js': ['views/js/main.js']
+                    'build/combined.min.js': ['build/combined.js'],
+                    'views/build/combined.min.js': ['views/build/combined.js']
                 }
             }
         },

@@ -19,8 +19,9 @@
 </head>
 
 <body>
-  <div id="movingPizzas1">
-  </div>
+  <!-- I moved the movingPizzas1 div out of the container so it wouldn't
+  be as nested and it would take fewer resources to move the pizza images. -->
+
   <div class="container">
     <div id="header" class="row">
       <div class="col-md-6">
@@ -45,6 +46,8 @@
             </div>
           </div>
         </div>
+      </div>
+      <div id="movingPizzas1" class="col-md-6">
       </div>
     </div>
     <div id="callToAction" class="row">
@@ -157,6 +160,8 @@
     </div>
     <div id="footer" class="col-md-12">Thanks for visiting! &copy; 2014 Udacity</div>
   </div>
+  <!-- This file is main.js and loadCSS.js combined and minified.  loadCSS.js
+  loads style.css into the document after the page loads -->
   <script type="text/javascript" src="build/combined.min.js"></script>
 </body>
 

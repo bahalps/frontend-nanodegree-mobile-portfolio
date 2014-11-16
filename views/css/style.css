@@ -34,7 +34,7 @@ form {
 * the entire page to repaint on scroll.  After some internet searching,
 * I found that adding backface-visibility: hidden is a fix.  I don't know if
 * this is a legitimate solution or a "hack" but it did help by putting
-* the pizzas on a different layer.
+* the pizzas on a separate layer.
 */
 .mover {
   position: fixed;

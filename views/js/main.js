@@ -505,8 +505,14 @@ function updatePositions() {
 
     for (var i = 0; i < itemsLen; i++) {
         var phase = Math.sin((lastScrollY / 1250) + (i % 5));
+        // Instead of updating left property of each element, use translateX.
+        // Updating left property requires composite, paint, and layout.
+        // TranslateX only requires composite, so it is much more efficient.
         items[i].style.WebkitTransform = "translateX(" + 100 * phase + "px)";
-        //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+        items[i].style.MozTransform = "translateX(" + 100 * phase + "px)";
+        items[i].style.msTransform = "translateX(" + 100 * phase + "px)";
+        items[i].style.OTransform = "translateX(" + 100 * phase + "px)";
+        items[i].style.transform = "translateX(" + 100 * phase + "px)";
     }
 
     // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -519,21 +525,34 @@ function updatePositions() {
     }
 }
 
+// Variable to hold the number of pixels the page is currently scrolled.
 var lastScrollY = 0;
+// Represents whether or not the positions of the pizzas are being updated.
+// True if the pizzas are being updated, false otherwise.
 var ticking = false;
 
+// Function to call when the user scrolls the page.  Gets the number of pixels
+// the page is scrolled, then checks if the positions of the pizzas are
+// currently updating.  If not, update the pizza positions.
 function onScroll() {
     lastScrollY = window.scrollY;
     requestTick();
 }
 
+// Function that checks if the pizza positions are updating.  If not, requests
+// an animation frame so the pizzas can update at the best time for the browser.
+// Doesn't run if pizzas are already updating to prevent unnecessary use of
+// computer's resources that could reduce performance.
 function requestTick() {
     if (!ticking) {
         requestAnimationFrame(update);
+        // Let other functions know the update is happening.
         ticking = true;
     }
 }
 
+// Updates the positions of the pizzas and updates the ticking variable
+// so other functions know the update is finished. 
 function update() {
     updatePositions();
     ticking = false;
@@ -565,6 +584,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // List of mover elements is not changing, so store it in a variable instead
     // of recalculating each time you need to use it.
     items = document.querySelectorAll('.mover');
+    // Store length of list as well.  Now no need to calculate on each call
+    // of updatePositions or each pass through the for loop.
     itemsLen = items.length;
     updatePositions();
 });

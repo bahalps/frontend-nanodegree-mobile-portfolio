@@ -712,7 +712,7 @@ var resizePizzas = function (size) {
 
     // Iterates through pizza elements on the page and changes their widths
     function changePizzaSizes(size) {
-      for (var i = 0, len = document.querySelectorAll(".randomPizzaContainer").length; i < len; i++) {
+        for (var i = 0, len = document.querySelectorAll(".randomPizzaContainer").length; i < len; i++) {
             var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
             var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
             document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
@@ -765,11 +765,10 @@ function updatePositions() {
     frame++;
     window.performance.mark("mark_start_frame");
 
-    var bodyTop = document.body.scrollTop;
-    console.log(bodyTop);
-    for (var i = 0, len = items.length; i < len; i++) {
-        var phase = Math.sin((bodyTop / 1250) + (i % 5));
-        items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    for (var i = 0; i < itemsLen; i++) {
+        var phase = Math.sin((lastScrollY / 1250) + (i % 5));
+        items[i].style.WebkitTransform = "translateX(" + 100 * phase + "px)";
+        //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     }
 
     // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -782,25 +781,52 @@ function updatePositions() {
     }
 }
 
-// runs updatePositions on scroll
-window.addEventListener('scroll', function() {
-    window.requestAnimationFrame(Cowboy.throttle(350, updatePositions));
-});
+var lastScrollY = 0;
+var ticking = false;
+
+function onScroll() {
+    lastScrollY = window.scrollY;
+    requestTick();
+}
+
+function requestTick() {
+    if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+    }
+}
+
+function update() {
+    updatePositions();
+    ticking = false;
+}
+
+window.addEventListener('scroll', onScroll, false);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function () {
     var cols = 8;
     var s = 256;
+    // Instead of creating 200 pizzas, only create the number of pizzas
+    // Needed based on the screen size.
+
+    // Stop making new pizza elements when the elements are being created
+    // off the bottom of the screen.
     for (var j = 0, height = window.screen.height; j < height; j += s) {
+        // Create pizzas at intervals of s (256) pixels until the end of the
+        // screen is reached.
         for (var i = 0, width = window.screen.width; i < width; i += s) {
             var elem = document.createElement('img');
             elem.className = 'mover';
             elem.src = "build/pizza.png";
-            elem.basicLeft = i;
+            elem.style.left = i + 'px';
             elem.style.top = j + 'px';
             document.querySelector("#movingPizzas1").appendChild(elem);
         }
     }
+    // List of mover elements is not changing, so store it in a variable instead
+    // of recalculating each time you need to use it.
     items = document.querySelectorAll('.mover');
+    itemsLen = items.length;
     updatePositions();
 });

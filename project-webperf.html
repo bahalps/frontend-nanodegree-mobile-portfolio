@@ -11,8 +11,16 @@
   <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
   <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
 
+  <!--I added the print media query this css link so it won't block rendering.
+  The page doesn't need it until the user wants to print, so it can wait until
+  the page loads.-->
   <link href="build/print.min.css" rel="stylesheet" media="print">
+  <!--Added async tag to google analytics script because it is a third-party
+  script that doesn't impact the DOM.  It should not block the rendering path-->
   <script async src="http://www.google-analytics.com/analytics.js"></script>
+  <!--I inlined several styles that I thought were most critical.  These styles
+  make sure the content fits on the screen, and gives the page the same over all
+  layout as it has when the full css file is loaded.-->
   <style>
     header,
     footer,
@@ -70,6 +78,11 @@
       </p>
     </footer>
   </div>
+  <!--I moved the google analytics script to a separate file and created a new
+  loadCSS javascript file that (as the name suggests) loads a css file into the
+  html document.  I combined these files with the perfmatters.js file and put
+  the combined file at the bottom of the body so it won't block the rendering
+  path-->
   <script src="build/combined.min.js"></script>
 </body>
 

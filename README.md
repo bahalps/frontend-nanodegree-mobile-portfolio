@@ -1,65 +1,49 @@
-## Website Performance Optimization portfolio project
+# Website Performance Optimization Portfolio Project
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+In this project I took an existing website an optimized the critical rendering path to achieve a Pagespeed Insights score above 90.  I took the following steps to achieve this performance improvement:
 
-To get started, check out the repository, inspect the code,
+* Utilized Grunt to automate:
+  * Image minification
+  * CSS and Javascript concatenation
+  * CSS and Javascript minification
+  * Running Pagespeed Insights Test
 
-### Getting started
+* Inlined critical CSS and used JavaScript to load the remaining CSS file after the page loads.
+* Added the 'print' media query to the print.css file because it is only needed when the user wants to print the page, not at page load.
+* Added 'async' tag to the Google Analytics file because it doesn't interact with the DOM and shouldn't block rendering.
+* Used GIMP to resize images to reduce/eliminate the need to resize using CSS.
 
-Some useful tips to help you get started:
+The pizza.html page has a background that moves when the user scrolls the page.  Initially this animation was very choppy, but I made some changes to achieve a smooth 60fps on scroll.
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+* I reduced the number of pizza images in the background.  The original code blindly created 200 pizzas no matter what, so many were off the screen and invisible to the user but still taking the computer's resources to move.  Now the program gets the screen size of the device and makes the correct number of pizzas based on that.
+* To move the pizzas the original code changed the left style property of the pizza element.  This is inefficient because the browser needs to composite, paint, and layout the element every time it moves.  I used the translateX style to move the element instead because it only requires compositing (which is cheap).
+* The original code had a scroll event listener and updated the position of the pizzas every time it detected a scroll.  This can be a problem because there can be multiple scroll events detected while the elements are currently updating or about to update.  This will cause the update function to run more times than necessary.  I modified the code so that the update function will only be called if an update isn't currently happening or about to happen.
+  
+### The Following Files Have Been Added or Modified to Improve Performance
+* Gruntfile.js
+* package.json
+* index.html
+* project-2048.html
+* project-mobile.html
+* project-webperf.html
+* views/pizza.html
+* css/style.css
+* js/analytics.js
+* js/loadCSS.js
+* views/js/main.js
+* views/css/style.css
+* views/js/loadCSS.js
+* All image files
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+(Note: all files in "build" folders are just combined and/or minified versions of the above modified files.)
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
+### How to Test My Website's Performance
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
+Go to [Pagespeed Insights](https://developers.google.com/speed/pagespeed/insights/) and enter in these urls:
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+* http://bahalps.github.io/frontend-nanodegree-mobile-portfolio/
+* http://bahalps.github.io/frontend-nanodegree-mobile-portfolio/project-2048.html
+* http://bahalps.github.io/frontend-nanodegree-mobile-portfolio/project-webperf.html
+* http://bahalps.github.io/frontend-nanodegree-mobile-portfolio/project-mobile.html
+* http://bahalps.github.io/frontend-nanodegree-mobile-portfolio/views/pizza.html
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
-
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
-
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
-
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
-
-### Sample Portfolios
-
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
-
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
